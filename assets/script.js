@@ -53,6 +53,7 @@ const addSelected = () => {
 for(const slide of slides)
 console.log(slide)
 
+
 const slide = {
 	prop: slides,
 	func:function() {
