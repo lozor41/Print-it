@@ -18,65 +18,64 @@ const slides = [
 ]
 
 const left = document.querySelector('.arrow_left')
-const right = document.querySelector('arrow_right')
-const imgBanner = document.querySelector('nameBanner')
-const nameBanner = document.querySelector('.tagLine')
+const right = document.querySelector('.arrow_right')
+const imgBanner = document.querySelector('.banner-img')
+const nameBanner = document.querySelector('name-banner')
 const dots = document.querySelector('.dots')
 
-let numberSlide = slides.length - 1;
-let srcImage = "../assets/images/slideshow";
 let numberDot = 0;
 
-const dotsList = document.querySelectorAll(".dots")
+const updateSlide = () => {
+  // Supprimer tout le contenu du container .dots
+  dots.innerHTML = ''
 
-console.log(numberSlide)
+  for (let pas = 0; pas < slides.length; pas++) {
+    const dot = document.createElement('span')
 
-for (let pas = 0; pas <= numberSlide; pas++) {
-  dots.innerHTML +=
-    '<span id="dot' +
-    pas +
-    '" class="dot" title="Image ' +
-    (pas + 1) +
-    '"></span>';
+    // if (pas === numberDot) {
+    //   dot.setAttribute('class', 'dot dot_selected')
+    // } else {
+    //   dot.setAttribute('class', 'dot')
+    // }
+    dot.setAttribute('class', pas === numberDot ? 'dot dot_selected' : 'dot')
+
+    dots.appendChild(dot)
+    
+    // TODO mettre à jour l'image en fonction de la position de numberDot
+
+    // TODO mettre à jour le tagLine en fonction de la position de numberDot
+
+  }
 }
 
-const addSelected = () => {
-  for (let pas = 0; pas <= numberSlide; pas++) {
-    if (pas === numberDot) {
-      dotsList[pas].classList.add("dot_selected");
-    } else {
-      dotsList[pas].classList.remove("dot_selected");
-    }
-  }
-};
+updateSlide()
 
-console.log(srcImage)
+// for (const slide of slides) {
+//   console.log(slide)
+// }
 
-for (const slide of slides)
-  console.log(slide)
-
-const slide = {
-  prop: slides,
-  func: function () {
-    return this.prop;
-  },
-};
-
-console.log(slide.func())
-
+function changeSlide(sens) {
+  document.getElementById("slide").src = "./assets/images/slideshow/" + slides [numberDot]
+}
 
 left.addEventListener("click", () => {
   if (numberDot <= 0) {
-    numberDot = numberSlide;
+    numberDot = slides.length - 1;
   } else {
     numberDot--;
   }
+
+  updateSlide()
+  console.log('click gauche:', numberDot)
 });
 
 right.addEventListener("click", () => {
-  if (numberDot >= numberSlide) {
+  if (numberDot >= slides.length - 1) {
     numberDot = 0;
   } else {
     numberDot++;
   }
+
+  updateSlide()
+  console.log('click droite:', numberDot)
 });
