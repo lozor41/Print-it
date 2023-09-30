@@ -56,7 +56,7 @@ updateSlide()
 
 function changeSlide(sens) {
   document.getElementById("slide").src="./assets/images/slideshow/"+slides[numberDot].image
-  document.getElementById("tag").innerHTML=nameBanner[numberDot].tagLine
+  document.getElementById("tag").innerHTML=slides[numberDot].tagLine
 }
 
 left.addEventListener("click", () => {
